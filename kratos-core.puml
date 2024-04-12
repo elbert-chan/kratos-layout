@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+component "核心领域" {
+  [biz]
+  [domain]
+
+}
+
+note left of [biz]
+  领域内核心业务逻辑：xxxUseCase, yyyUseCase
+
+  UseCase 表示一个事务
+end note
+
+note right of [domain]
+    领域内核心数据结构：Entity, ValueObject, aggregation
+    外部依赖接口：
+    - Repo: 数据相关接口
+    - Relay: 服务相关接口
+end note
+
+component "外部依赖" {
+    [data]
+    [facade]
+}
+
+note top of [data]
+    domain 中数据接口的实现：
+    - MySQL Implement
+    - Redis Implement
+    - Kafka Implement
+end note
+
+note top of [facade]
+    domain 中服务接口的实现：
+    - 第三方 RPC client
+    - 第三方 HTTP client
+end note
+
+
+component service
+note right of [service]
+接入层过后的服务入口，组织用例
+end note
+
+component server
+note right of [server]
+    对外提供 GRPC Server 和 HTTP Server 的 provider
+end note
+
+component api
+note left of [api]
+    服务对外提供的服务协议（GRPC, HTTP）
+
+    路由注册
+end note
+
+[data] ---> [domain]
+[facade] ---> [domain]
+[biz] <--- [service]
+[api] ---> [server]
+[service]<---[server]
+
+@enduml
