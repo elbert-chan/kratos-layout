@@ -11,7 +11,7 @@ go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
 ## Create a service
 ```
 # Create a template project
-kratos new server
+kratos new server --repo-url="https://github.com/elbert-chan/kratos-layout.git"
 
 cd server
 # Add a proto template
