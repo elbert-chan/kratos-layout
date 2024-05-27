@@ -50,7 +50,7 @@ note right of [server]
 end note
 
 component api
-note left of [api]
+note right of [api]
     服务对外提供的服务协议（GRPC, HTTP）
 
     路由注册
@@ -59,7 +59,9 @@ end note
 [data] ---> [domain]
 [facade] ---> [domain]
 [biz] <--- [service]
-[api] ---> [server]
-[service]<---[server]
+[api] <--- [server]
+[service] ---> [api]
+[service] <--- [server]
+
 
 @enduml
